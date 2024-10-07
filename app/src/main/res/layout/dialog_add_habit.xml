@@ -6,12 +6,17 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/editTextHabitName"
+        android:id="@+id/habit_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Habit Name" />
+    <EditText
+        android:id="@+id/frequency_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Frequency" />
     <Button
-        android:id="@+id/buttonAddHabit"
+        android:id="@+id/add_habit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Habit" />

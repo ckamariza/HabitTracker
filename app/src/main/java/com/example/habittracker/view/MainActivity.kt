@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.habittracker.R
 import com.example.habittracker.databinding.ActivityMainBinding
+import com.example.habittracker.model.HabitAdapter
 import com.example.habittracker.viewmodel.HabitViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -63,16 +65,20 @@ class MainActivity : AppCompatActivity() {
 
         dialog.setContentView(R.layout.dialog_add_habit)
 
-        val editTextHabitName = dialog.findViewById<EditText>(R.id.editTextHabitName)
-        val buttonAddHabit = dialog.findViewById<Button>(R.id.buttonAddHabit)
+        val editTextHabitName = dialog.findViewById<EditText>(R.id.habit_name_et)
+        val frequencyEt= dialog.findViewById<EditText>(R.id.frequency_et)
+
+        val buttonAddHabit = dialog.findViewById<Button>(R.id.add_habit_btn)
 
         buttonAddHabit.setOnClickListener {
             val habitName = editTextHabitName.text.toString()
-            if (habitName.isNotEmpty()) {
-                Toast.makeText(this, "Habit '$habitName' added!", Toast.LENGTH_SHORT).show()
+            val frequency = frequencyEt.text.toString().toIntOrNull()
+
+            if (habitName.isNotEmpty() && frequency!= null ) {
+               viewModel.addHabit(habitName, frequency)
                 dialog.dismiss()
             } else {
-                Toast.makeText(this, "Please enter a habit name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter valid details", Toast.LENGTH_SHORT).show()
             }
         }
         dialog.show()
